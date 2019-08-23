@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/scss/bootstrap.scss'
 import CampaignsList from './CampaignsList'
 import SideBar from './SideBar'
@@ -10,56 +10,63 @@ import product4Image from './images/product4.jpg'
 const campaigns = [
   {
     id: 1,
-    name: "Arbuck coffee",
-    status: "open",
+    name: 'Arbuck coffee',
+    status: 'open',
     image: product1Image,
     quantity: 19,
     initialQuantity: 20,
     audience: 729,
-    note: ""
+    note: '',
   },
   {
     id: 2,
-    name: "LifeSters Memory Box",
-    status: "open",
+    name: 'LifeSters Memory Box',
+    status: 'open',
     image: product2Image,
     quantity: 3,
     initialQuantity: 4,
     audience: 234,
-    note: "Only 3 left!"
+    note: 'Only 3 left!',
   },
   {
     id: 3,
-    name: "LifeSters SnapCam III",
-    status: "draft",
+    name: 'LifeSters SnapCam III',
+    status: 'draft',
     image: product3Image,
     quantity: 3,
     initialQuantity: 3,
     audience: 872,
-    note: ""
+    note: '',
   },
   {
     id: 4,
-    name: "Pink! Watch - Summer Edition II",
-    status: "closed",
+    name: 'Pink! Watch - Summer Edition II',
+    status: 'closed',
     image: product4Image,
     quantity: 0,
     initialQuantity: 5,
     audience: 5,
-    note: "Sold out in 3 days!"
-  }
+    note: 'Sold out in 3 days!',
+  },
 ]
 
-const App = () => (
-  <div className="d-flex">
-    <div className="flex-grow-1">
-      <div className="m-5">
-        <h1 className="mb-3">Campaigns</h1>
-        <CampaignsList campaigns={campaigns} />
+const App = () => {
+  const [campaignId, setCampaignId] = useState(null)
+
+  return (
+    <div className='d-flex'>
+      <div className='flex-grow-1'>
+        <div className='m-5'>
+          <h1 className='mb-3'>Campaigns</h1>
+          <CampaignsList
+            campaigns={campaigns}
+            onCampaignClick={campaignId => setCampaignId(campaignId)}
+          />
+        </div>
       </div>
+      <SideBar campaign={campaigns.find(campaign => campaign.id === campaignId)} />
     </div>
-    <SideBar />
-  </div>
-)
+  )
+}
 
 export default App

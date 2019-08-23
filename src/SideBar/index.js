@@ -1,22 +1,23 @@
 import React from 'react'
 import PlaceHolder from './PlaceHolder'
+import CampaignDetails from './CampaignDetails'
 
-const SideBar = () => (
+const SideBar = ({ campaign }) => (
   <div
-    className=""
+    className=''
     style={{
       width: 350,
-      height: "100vh",
-      borderLeft: "solid 5px #e9ebef"
+      height: '100vh',
+      borderLeft: 'solid 5px #e9ebef',
     }}
   >
-    <SideBarContent />
+    <SideBarContent campaign={campaign} />
   </div>
 )
 
-const SideBarContent = () => (
-  <PlaceHolder />
-  // use CampaignDetails component here to show selected campaign details
-)
+const SideBarContent = ({ campaign }) => {
+  if (!campaign) return <PlaceHolder />
+  return <CampaignDetails campaign={campaign} />
+}
 
 export default SideBar
